@@ -1,4 +1,3 @@
-require 'pry-byebug'
 
 def caesar_cipher(string, shift)
   string_to_code = string.codepoints()
@@ -20,7 +19,6 @@ def caesar_cipher(string, shift)
 end
 
 def find_shifted_code(start, last, code, shift)
-
   if shift < 0
     x = (code + shift - start - 26).remainder(26)
     if x == 0
