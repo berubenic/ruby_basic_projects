@@ -1,38 +1,27 @@
 # frozen_string_literal: true
 
 def caesar_cipher(string, shift)
-  string_to_code = string.codepoints
-  shifted_array = string_to_code.map do |code|
+  shifted_array = string.codepoints.map do |code|
     if code >= 65 && code <= 90
-      start = 65
-      last = 90
-      find_shifted_code(start, last, code, shift).chr
+      find_shifted_code(65, 90, code, shift).chr
     elsif code >= 97 && code <= 122
-      start = 97
-      last = 122
-      find_shifted_code(start, last, code, shift).chr
+      find_shifted_code(97, 122, code, shift).chr
     else
       code.chr
     end
   end
-  ciphered_string = shifted_array.join
-  p ciphered_string
+  puts shifted_array.join
 end
 
 def find_shifted_code(start, last, code, shift)
   if shift.negative?
     x = (code + shift - start - 26).remainder(26)
-    shifted_code = if x.zero?
-                     start
-                   else
-                     x + 1 + last
-                   end
-    shifted_code
+    return start if x.zero?
+
+    x + 1 + last
   elsif shift.positive?
-    x = (code + shift - last + 26).remainder(26)
-    shifted_code = x - 1 + start
-    shifted_code
+    (code + shift - last + 26).remainder(26) - 1 + start
   end
 end
 
-caesar_cipher('Hello, World!', -29)
+caesar_cipher('a', 1)
